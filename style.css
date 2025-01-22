@@ -1,1 +1,64 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #1e90ff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+.map-container {
+    flex: 1;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    background: #f4f4f4;
+    border-left: 1px solid #ddd;
+    padding: 10px;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed {
+    transform: translateX(100%);
+}
+
+.toggle-sidebar {
+    background: #1e90ff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.location-list {
+    list-style: none;
+    padding: 0;
+}
+
+.location-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.location-list li:hover {
+    background: #e0f7ff;
+}
 

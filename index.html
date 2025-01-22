@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoSave Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Logo and Header -->
+        <header class="header">
+            <div class="logo">GeoSave</div>
+        </header>
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <button class="toggle-sidebar">&#x25C0;</button>
+            <h2>Points of Interest</h2>
+            <ul class="location-list">
+                <li data-lat="40.7128" data-lon="-74.0060">Location 1 (New York, NY)</li>
+                <li data-lat="34.0522" data-lon="-118.2437">Location 2 (Los Angeles, CA)</li>
+                <li data-lat="41.8781" data-lon="-87.6298">Location 3 (Chicago, IL)</li>
+            </ul>
+        </aside>
+    </div>
+
+    <script>
+        // Initialize the map (you can use Leaflet or Mapbox here)
+        const map = L.map('map').setView([37.7749, -122.4194], 4); // Default center (San Francisco)
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Add markers from the sidebar
+        document.querySelectorAll('.location-list li').forEach(item => {
+            const lat = parseFloat(item.getAttribute('data-lat'));
+            const lon = parseFloat(item.getAttribute('data-lon'));
+
+            const marker = L.marker([lat, lon]).addTo(map);
+            marker.bindPopup(item.textContent);
+
+            item.addEventListener('click', () => {
+                map.setView([lat, lon], 8);
+                marker.openPopup();
+            });
+        });
+
+        // Sidebar toggle functionality
+        const sidebar = document.querySelector('.sidebar');
+        const toggleButton = document.querySelector('.toggle-sidebar');
+
+        toggleButton.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            toggleButton.innerHTML = sidebar.classList.contains('collapsed') ? '&#x25B6;' : '&#x25C0;';
+        });
+    </script>
+</body>
+</html>
 
